@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить студента</title>
+</head>
+<body>
+
+<h1>Добавить студента</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Имя:<br>
+    <input type="text" name="first_name"><br><br>
+
+    Фамилия:<br>
+    <input type="text" name="last_name"><br><br>
+
+    Возраст:<br>
+    <input type="number" name="age"><br><br>
+
+    <!-- 🔥 ВОТ ЭТО ГЛАВНОЕ ИЗМЕНЕНИЕ -->
+    Группа:<br>
+    <select name="group">
+        {% for group in groups %}
+            <option value="{{ group.id }}">{{ group.name }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    Фото:<br>
+    <input type="file" name="photo"><br><br>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<br>
+<a href="{% url 'student_list' %}">Назад</a>
+
+</body>
+</html>
